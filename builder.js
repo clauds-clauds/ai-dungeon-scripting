@@ -10,8 +10,6 @@ const MODULE_CONFIG = {
         path: 'Modules/Random Assortment of Stuff/',
         files: {
             library: 'library.js',
-            input: 'input.js',
-            output: 'output.js'
         },
         hooks: {
             input: 'text = RandomAssortmentOfStuff.Hooks.onInput(text)',
