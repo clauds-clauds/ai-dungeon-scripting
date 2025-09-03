@@ -16,3 +16,23 @@ This repository contains some of my scripting modules, which aim to improve the 
 * **Max Occurrences:** (1-4) - The maximum allowed occurrences after which a sentence is regarded as a repetition.
 * **Show Message:** (true|false) - Shows a direct message if enabled; disable if another script uses state.message.
 * **Debug Notes:** (true|false) - Writes the last detected repetition to the Notes section of the settings card.
+
+### Note Writing
+
+Another function of the module is the ability to quickly add information to the **Notes** section of **Story Cards**. You can do this by executing a command like: `/note {CARD TRIGGER HERE} {NOTE INFORMATION HERE}`
+
+#### Examples
+
+---
+
+##### Example 1:
+**Command:** `/note Steve I still need to give Steve some cake for his birthday.`
+
+**Result:** `- I still need to give Steve some cake for his birthday.` is added to the **Notes** section of Steve's **Story Card**.
+
+---
+
+##### Example 2:
+Sometimes, you have triggers or names that are made up of more than one word, such as "Steve Buscemi." You can encapsulate these into curly braces `{...}`.
+
+**Command:** `/note {Steve Buscemi} {I still need to give Steve a second cake for his birthday.}`
