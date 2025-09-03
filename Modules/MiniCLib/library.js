@@ -4,7 +4,7 @@
 const MiniCLib = {
     Log: {
         // If this is set to true then the console log below is disabled.
-        isProduction: false,
+        isProduction: true,
         // Simply logs a message to the console (if not prod) whilst sticking with a prettier format.
         neat: function (from, text) {
             if (this.isProduction) return
