@@ -1,4 +1,3 @@
-// Configuration of available modules. This makes the builder easily expandable.
 const MODULE_CONFIG = {
     'miniclib': {
         name: 'MiniCLib',
