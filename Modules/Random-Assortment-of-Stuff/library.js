@@ -3,7 +3,7 @@
 const RandomAssortmentOfStuff = {
     Functions: {
         // Scans the context and detects repeating phrases, also attempts to find the ending of the sentence for reporting.
-        warnAboutRepetition: function (output, context, minWordLength = 8, minOccurrences = 1) {
+        warnAboutRepetition: function (output, context, minWordLength = 8, maxOccurrences = 1) {
             // I still need to document this whole thing but I procrastined so long that I kinda forgot how it works.
             // I'll totes do that later...
 
@@ -45,7 +45,7 @@ const RandomAssortmentOfStuff = {
             }
 
             // Do some stuff if there are actually any repeating phrases.
-            if (foundPhrases.length >= minOccurrences) {
+            if (foundPhrases.length >= maxOccurrences) {
                 const messageContent = foundPhrases.map((p, idx) => `${idx}: ${p}`).join('\n')
 
                 // Print all the repeating phrases in the console.
@@ -85,7 +85,7 @@ const RandomAssortmentOfStuff = {
     Hooks: {
         onInput: function (text) {
             // Settings Story Card configuration down below:
-            let repetitionEntry = "Repetition Warning\n> Enabled: true\n> Max Actions: 16\n> Min Words: 8\n> Min Occurrences: 1\n> Show Message: true\n> Debug Notes: true"
+            let repetitionEntry = "Repetition Warning\n> Enabled: true\n> Max Actions: 16\n> Min Words: 8\n> Max Occurrences: 1\n> Show Message: true\n> Debug Notes: true"
             let settingsCard = MiniCLib.Find.storyCard("Random Assortment of Stuff Settings", true, repetitionEntry, "Scripting")
 
             // Parse the settings from it.
@@ -96,7 +96,7 @@ const RandomAssortmentOfStuff = {
             if (state.clauds_repetitionWarningEnabled) {
                 state.clauds_repetitionMaxActions = MiniCLib.Read.setting(settingsCard.entry, "Max Actions", 16)
                 state.clauds_repetitionMinWords = MiniCLib.Read.setting(settingsCard.entry, "Min Words", 8)
-                state.clauds_repetitionMinOccurrences = MiniCLib.Read.setting(settingsCard.entry, "Min Occurrences", 1)
+                state.clauds_repetitionMaxOccurrences = MiniCLib.Read.setting(settingsCard.entry, "Max Occurrences", 1)
                 state.clauds_repetitionShowMessage = MiniCLib.Read.setting(settingsCard.entry, "Show Message", true)
                 state.clauds_repetitionDebugNotes = MiniCLib.Read.setting(settingsCard.entry, "Debug Notes", true)
             }
@@ -108,7 +108,7 @@ const RandomAssortmentOfStuff = {
             return text
         },
         onOutput: function (text) {
-            if (state.clauds_repetitionWarningEnabled) RandomAssortmentOfStuff.Functions.warnAboutRepetition(text, MiniCLib.Utils.recentContext(state.clauds_repetitionMaxActions), state.clauds_repetitionMinWords, state.clauds_repetitionMinOccurrences)
+            if (state.clauds_repetitionWarningEnabled) RandomAssortmentOfStuff.Functions.warnAboutRepetition(text, MiniCLib.Utils.recentContext(state.clauds_repetitionMaxActions), state.clauds_repetitionMinWords, state.clauds_repetitionMaxOccurrences)
             return text
         }
     }
