@@ -2,6 +2,28 @@
 // MiniCLib: This is a minified version of my personal scripting library.
 // Put this into the Library section of the AI Dungeon Scripting tab.
 const MiniCLib = {
+    Log: {
+        // If this is set to true then the console log below is disabled.
+        isProduction: false,
+        // Simply logs a message to the console (if not prod) whilst sticking with a prettier format.
+        neat: function (from, text) {
+            if (this.isProduction) return
+            console.log(`${from}: ` + text)
+        },
+        // Shows a message, very useful comment.
+        message: function (from, text, generateUUID = true) {
+            state.message = `${from}: ${text}\n${generateUUID ? `UUID: ${MiniCLib.Utils.generateUUID()}` : ""}`
+        }
+    },
+    Timer: {
+        initial: 0,
+        start: function () {
+            this.initial = Date.now()
+        },
+        stop: function () {
+            MiniCLib.Log.neat("MiniCLib", Date.now() - this.initial + "ms!")
+        }
+    },
     Utils: {
         // Generates a pseudo-UUID, handy for debugging actions.
         generateUUID: function () {
@@ -21,19 +43,6 @@ const MiniCLib = {
             }
             return context.trim();
         },
-    },
-    Log: {
-        // If this is set to true then the console log below is disabled.
-        isProduction: false,
-        // Simply logs a message to the console (if not prod) whilst sticking with a prettier format.
-        neat: function (from, text) {
-            if (this.isProduction) return
-            console.log(`${from}: ` + text)
-        },
-        // Shows a message, very useful comment.
-        message: function (from, text, generateUUID = true) {
-            state.message = `${from}: ${text}\n${generateUUID ? MiniCLib.Utils.generateUUID() : ""}`
-        }
     },
     Find: {
         // Tries to find a Story Card, also includes SC creation and caching for performance reasons.
@@ -153,7 +162,7 @@ const MiniCLib = {
         }
     },
     Debug: {
-        // Shows a simple "Hello World" mesasge to the user.
+        // Shows a simple "Hello World" message to the user.
         helloWorld: function () {
             MiniCLib.Log.message("MiniCLib", "Hello world!")
         },

@@ -2,8 +2,13 @@
 // Random Assortment of Stuff: An assortment of random stuff! Wow, right?
 const RandomAssortmentOfStuff = {
     Functions: {
-        // Scans the context and detects hidden phrases, also attempts to find the ending of the sentence for reporting.
+        // Scans the context and detects repeating phrases, also attempts to find the ending of the sentence for reporting.
         warnAboutRepetition: function (output, context, minWordLength = 8, minOccurrences = 1) {
+            // I still need to document this whole thing but I procrastined so long that I kinda forgot how it works.
+            // I'll totes do that later...
+
+            // Uncomment this to check how long this whole thing takes.
+            // MiniCLib.Timer.start()
             const cleanText = (text) => (text ? text.trim().replace(/\s+/g, ' ') : '')
             const normalizeWord = (word) => word.toLowerCase().replace(/^[.,!?;:]+|[.,!?;:]+$/g, '')
 
@@ -39,17 +44,30 @@ const RandomAssortmentOfStuff = {
                 }
             }
 
+            // Do some stuff if there are actually any repeating phrases.
             if (foundPhrases.length >= minOccurrences) {
                 const messageContent = foundPhrases.map((p, idx) => `${idx}: ${p}`).join('\n');
+
+                // Print all the repeating phrases in the console.
                 for (const phrase of foundPhrases) MiniCLib.Log.neat("Random Assortment of Stuff", `Detected repetition! ${phrase}`)
+
+                // Show a message if that is turned on, can interfere with other script libraries so there's that.
                 if (state.clauds_repetitionShowMessage) MiniCLib.Log.message("Random Assortment of Stuff", `Detected repetition!\n${messageContent}`)
+
+                // Also write it to the notes section of the settings card if enabled.
+                if (state.clauds_repetitionDebugNotes) MiniCLib.Find.storyCard("Random Assortment of Stuff Settings").description = `Latest repetition:\n${messageContent}`
+            } else if (state.clauds_repetitionDebugNotes) {
+                MiniCLib.Find.storyCard("Random Assortment of Stuff Settings").description = `Latest repetition:\nNo repetition detected!`
             }
+
+            // Uncomment this to check how long this whole thing takes.
+            // MiniCLib.Timer.stop()
         }
     },
     Hooks: {
         onInput: function (text) {
             // Settings Story Card configuration down below:
-            let settingCardEntry = "Repetition Warning\n> Enabled: true\n> Max Actions: 16\n> Min Words: 8\n> Min Occurrences: 1\n> Show Message: true"
+            let settingCardEntry = "Repetition Warning\n> Enabled: true\n> Max Actions: 16\n> Min Words: 8\n> Min Occurrences: 1\n> Show Message: true\n> Debug Notes: true"
             let settingsCard = MiniCLib.Find.storyCard("Random Assortment of Stuff Settings", true, settingCardEntry, "Scripting")
 
             // Parse the settings from it.
@@ -62,6 +80,7 @@ const RandomAssortmentOfStuff = {
                 state.clauds_repetitionMinWords = MiniCLib.Read.setting(settingsCard.entry, "Min Words", 8)
                 state.clauds_repetitionMinOccurrences = MiniCLib.Read.setting(settingsCard.entry, "Min Occurrences", 1)
                 state.clauds_repetitionShowMessage = MiniCLib.Read.setting(settingsCard.entry, "Show Message", true)
+                state.clauds_repetitionDebugNotes = MiniCLib.Read.setting(settingsCard.entry, "Debug Notes", true)
             }
 
             // No text is modified, so just return as is.
