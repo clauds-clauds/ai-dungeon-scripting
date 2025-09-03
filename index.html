@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Install Helper Thing</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Did they change this? -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .copy-btn {
+            transition: background-color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-white mb-2">Script Install Helper Thing</h1>
+            <p class="text-gray-400">Select the stuff you want and copy it into the <b>Scripting</b> section of your adventure!</p>
+        </header>
+
+        <main>
+            <section id="options" class="bg-gray-800 p-6 rounded-lg mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">1. Select Modules</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chk-miniclib" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-indigo-500 focus:ring-indigo-500" checked disabled>
+                        <label for="chk-miniclib" class="ml-3 text-lg text-gray-400">MiniCLib (Core Framework - Required)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chk-raos" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-indigo-500 focus:ring-indigo-500">
+                        <label for="chk-raos" class="ml-3 text-lg">Random Assortment of Stuff</label>
+                    </div>
+                </div>
+                <div class="mt-6 border-t border-gray-700 pt-6">
+                     <h3 class="text-xl font-semibold mb-3 text-white">Compatibility</h3>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="chk-autocards" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-indigo-500 focus:ring-indigo-500">
+                        <label for="chk-autocards" class="ml-3 text-lg">Add support for Auto-Cards</label>
+                    </div>
+                </div>
+            </section>
+
+            <section id="guide" class="bg-gray-800 p-6 rounded-lg mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">2. Installation Guide</h2>
+                <div id="guide-default">
+                    <p class="mb-2">Copy the contents from each box below into the corresponding tab in the AI Dungeon scripting section.</p>
+                    <p>For example, copy the code from the "Library" box and paste it into the "Library" tab in AI Dungeon.</p>
+                </div>
+                <div id="guide-autocards" class="hidden space-y-3">
+                    <p class="text-yellow-400 font-bold">You've enabled Auto-Cards support. Please follow these steps carefully:</p>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-300">
+                        <li>Go to the <a href="https://github.com/LewdLeah/Auto-Cards" target="_blank" class="text-indigo-400 hover:underline">Auto-Cards GitHub Repository</a> and copy the entire contents of its `Library.js` file.</li>
+                        <li>In AI Dungeon, go to the "Library" tab and paste the Auto-Cards code at the <span class="font-bold">very top</span>.</li>
+                        <li>Now, copy the code from the "Library" box below and paste it <span class="font-bold">at the bottom</span> of the "Library" tab in AI Dungeon, after the Auto-Cards code.</li>
+                        <li>For the "Input", "Context", and "Output" tabs, you can simply copy and paste the full contents from the boxes below.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="code-output" class="space-y-6">
+                <h2 class="text-2xl font-semibold mb-4 text-white text-center">3. Copy Your Scripts</h2>
+                <!-- Library -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-semibold text-white">Library Tab</h3>
+                        <button id="btn-copy-library" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
+                    </div>
+                    <textarea id="output-library" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
+                </div>
+                <!-- Input -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-semibold text-white">Input Tab</h3>
+                        <button id="btn-copy-input" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
+                    </div>
+                    <textarea id="output-input" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
+                </div>
+                <!-- Context -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-semibold text-white">Context Tab</h3>
+                        <button id="btn-copy-context" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
+                    </div>
+                    <textarea id="output-context" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
+                </div>
+                <!-- Output -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-semibold text-white">Output Tab</h3>
+                        <button id="btn-copy-output" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
+                    </div>
+                    <textarea id="output-output" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="builder.js"></script>
+</body>
+</html>
+
