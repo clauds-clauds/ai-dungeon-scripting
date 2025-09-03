@@ -29,11 +29,11 @@
 
         <main>
             <section id="options" class="bg-gray-800 p-6 rounded-lg mb-8">
-                <h2 class="text-2xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">1. Select Modules</h2>
+                <h2 class="text-2xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">1. Select Stuff</h2>
                 <div class="space-y-4">
                     <div class="flex items-center">
                         <input type="checkbox" id="chk-miniclib" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-indigo-500 focus:ring-indigo-500" checked disabled>
-                        <label for="chk-miniclib" class="ml-3 text-lg text-gray-400">MiniCLib (Core Framework - Required)</label>
+                        <label for="chk-miniclib" class="ml-3 text-lg text-gray-400">MiniCLib - <b>Required</b></label>
                     </div>
                     <div class="flex items-center">
                         <input type="checkbox" id="chk-raos" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-indigo-500 focus:ring-indigo-500">
@@ -44,7 +44,7 @@
                      <h3 class="text-xl font-semibold mb-3 text-white">Compatibility</h3>
                     <div class="flex items-center">
                         <input type="checkbox" id="chk-autocards" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-indigo-500 focus:ring-indigo-500">
-                        <label for="chk-autocards" class="ml-3 text-lg">Add support for Auto-Cards</label>
+                        <label for="chk-autocards" class="ml-3 text-lg">Add support for <b>Auto-Cards</b></label>
                     </div>
                 </div>
             </section>
@@ -56,22 +56,22 @@
                     <p>For example, copy the code from the "Library" box and paste it into the "Library" tab in AI Dungeon.</p>
                 </div>
                 <div id="guide-autocards" class="hidden space-y-3">
-                    <p class="text-yellow-400 font-bold">You've enabled Auto-Cards support. Please follow these steps carefully:</p>
+                    <p class="text-yellow-400 font-bold">You've enabled <b>Auto-Cards</b> support. Please follow these steps carefully:</p>
                     <ol class="list-decimal list-inside space-y-2 text-gray-300">
-                        <li>Go to the <a href="https://github.com/LewdLeah/Auto-Cards" target="_blank" class="text-indigo-400 hover:underline">Auto-Cards GitHub Repository</a> and copy the entire contents of its `Library.js` file.</li>
-                        <li>In AI Dungeon, go to the "Library" tab and paste the Auto-Cards code at the <span class="font-bold">very top</span>.</li>
-                        <li>Now, copy the code from the "Library" box below and paste it <span class="font-bold">at the bottom</span> of the "Library" tab in AI Dungeon, after the Auto-Cards code.</li>
-                        <li>For the "Input", "Context", and "Output" tabs, you can simply copy and paste the full contents from the boxes below.</li>
+                        <li>Go to the <a href="https://github.com/LewdLeah/Auto-Cards" target="_blank" class="text-indigo-400 hover:underline"><b>Auto-Cards</b> GitHub Repository</a> and copy the entire contents of its `Library.js` file.</li>
+                        <li>In <b>AI Dungeon</b>, go to the <b>Library</b> tab and paste the <b>Auto-Cards</b> code at the <span class="font-bold">very top</span>.</li>
+                        <li>Now, copy the code from the <b>Library</b> box below and paste it <span class="font-bold">at the bottom</span> of the <b>Library</b> tab in <b>AI Dungeon</b>, after the <b>Auto-Cards</b> code.</li>
+                        <li>For the <b>Input</b>, <b>Context</b>, and <b>Output</b> tabs, you can simply copy and paste the full contents from the boxes below.</li>
                     </ol>
                 </div>
             </section>
 
             <section id="code-output" class="space-y-6">
-                <h2 class="text-2xl font-semibold mb-4 text-white text-center">3. Copy Your Scripts</h2>
+                <h2 class="text-2xl font-semibold mb-4 text-white text-center">3. Copy The Stuff</h2>
                 <!-- Library -->
                 <div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-semibold text-white">Library Tab</h3>
+                        <h3 class="text-xl font-semibold text-white">Library</h3>
                         <button id="btn-copy-library" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
                     </div>
                     <textarea id="output-library" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
@@ -79,7 +79,7 @@
                 <!-- Input -->
                 <div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-semibold text-white">Input Tab</h3>
+                        <h3 class="text-xl font-semibold text-white">Input</h3>
                         <button id="btn-copy-input" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
                     </div>
                     <textarea id="output-input" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
@@ -87,7 +87,7 @@
                 <!-- Context -->
                 <div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-semibold text-white">Context Tab</h3>
+                        <h3 class="text-xl font-semibold text-white">Context</h3>
                         <button id="btn-copy-context" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
                     </div>
                     <textarea id="output-context" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
@@ -95,7 +95,7 @@
                 <!-- Output -->
                 <div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-xl font-semibold text-white">Output Tab</h3>
+                        <h3 class="text-xl font-semibold text-white">Output</h3>
                         <button id="btn-copy-output" class="copy-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Copy</button>
                     </div>
                     <textarea id="output-output" rows="10" class="code-block w-full p-4 rounded-md border border-gray-700" readonly></textarea>
