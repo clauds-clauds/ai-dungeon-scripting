@@ -141,7 +141,7 @@ const MiniCLib = {
         }
     },
     Read: {
-        // Reads settings from a Story Card with valid value types being string, booleans, and numericals.
+        // Reads settings from a Story Card with valid value types being string, booleans, numericals and all that jazz.
         setting: function (entryText, settingName, defaultValue) {
             const regex = new RegExp(`^>\\s*${settingName}:\\s*(.+)`, 'm')
             const match = entryText.match(regex)

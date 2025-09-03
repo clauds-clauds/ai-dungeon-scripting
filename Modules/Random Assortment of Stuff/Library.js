@@ -46,7 +46,7 @@ const RandomAssortmentOfStuff = {
 
             // Do some stuff if there are actually any repeating phrases.
             if (foundPhrases.length >= minOccurrences) {
-                const messageContent = foundPhrases.map((p, idx) => `${idx}: ${p}`).join('\n');
+                const messageContent = foundPhrases.map((p, idx) => `${idx}: ${p}`).join('\n')
 
                 // Print all the repeating phrases in the console.
                 for (const phrase of foundPhrases) MiniCLib.Log.neat("Random Assortment of Stuff", `Detected repetition! ${phrase}`)
@@ -62,13 +62,31 @@ const RandomAssortmentOfStuff = {
 
             // Uncomment this to check how long this whole thing takes.
             // MiniCLib.Timer.stop()
+        },
+        parseAssortmentCommands: function (commandData) {
+            if (commandData == null) return; // Return if the thing is invalid.
+
+            let command = commandData[0]
+
+            // Note command thingy, so if the user types "/note".
+            if (command == "note") {
+                let target = commandData[1] // This finds the target SC to add the note to, so: /[note:0] [Steve:1] [Saw him at the park last:...]
+                let description = commandData.slice(2).join(' ')
+
+                if (!description) return false;
+
+                let card = MiniCLib.Find.storyCard(target).description += `- ${description}\n`
+                return true;
+            }
+
+            return false
         }
     },
     Hooks: {
         onInput: function (text) {
             // Settings Story Card configuration down below:
-            let settingCardEntry = "Repetition Warning\n> Enabled: true\n> Max Actions: 16\n> Min Words: 8\n> Min Occurrences: 1\n> Show Message: true\n> Debug Notes: true"
-            let settingsCard = MiniCLib.Find.storyCard("Random Assortment of Stuff Settings", true, settingCardEntry, "Scripting")
+            let repetitionEntry = "Repetition Warning\n> Enabled: true\n> Max Actions: 16\n> Min Words: 8\n> Min Occurrences: 1\n> Show Message: true\n> Debug Notes: true"
+            let settingsCard = MiniCLib.Find.storyCard("Random Assortment of Stuff Settings", true, repetitionEntry, "Scripting")
 
             // Parse the settings from it.
             // NOTE TO SELF: Check if there is a more performance friendly way of doing this, more caching?
@@ -83,10 +101,10 @@ const RandomAssortmentOfStuff = {
                 state.clauds_repetitionDebugNotes = MiniCLib.Read.setting(settingsCard.entry, "Debug Notes", true)
             }
 
-            // No text is modified, so just return as is.
-            return text
-        },
-        onContext: function (text) {
+            // Attempts to parse a command from the text, if a valid (Random Assortment of Stuff) command is found then it also removes it.
+            if (RandomAssortmentOfStuff.Functions.parseAssortmentCommands(MiniCLib.Find.command(text))) text = MiniCLib.Remove.command(text)
+
+            // Return the text.
             return text
         },
         onOutput: function (text) {
