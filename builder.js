@@ -7,7 +7,7 @@ const MODULE_CONFIG = {
     },
     'raos': {
         name: 'Random Assortment of Stuff',
-        path: 'Modules/Random Assortment of Stuff/',
+        path: 'Modules/Random-Assortment-of-Stuff/',
         files: {
             library: 'library.js',
         },
